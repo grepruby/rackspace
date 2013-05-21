@@ -1,0 +1,7 @@
+<div id="footer" class="span-32 last">
+	<h1 class="arial10pt291911" >Copyright &copy; 2011 Hostess, Inc.</h1>
+	<%= link_to "ABOUT", { :controller => "/content", :protocol => "http://", :action => "about"}, :class => "loraBld12pt291911" + (' linkOpen' if params[:action] == 'about').to_s %>
+	<%= link_to "MOBILE", 'http://www.myhostessapp.com/', :class => "loraBld12pt291911"%>	
+	<%= link_to "PRIVACY", { :controller => "/content", :protocol => "http://", :action => "privacyPolicy"}, :class => "loraBld12pt291911" + (' linkOpen' if params[:action] == 'privacyPolicy').to_s%>
+	<%= link_to "HELP", { :controller => "/content", :protocol => "http://", :action => "help"}, :class => "loraBld12pt291911" + (' linkOpen' if params[:action] == 'help').to_s%> 
+</div>

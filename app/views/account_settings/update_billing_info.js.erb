@@ -1,0 +1,17 @@
+if (<%= current_user.errors.length > 0%>){
+	var errors = "";
+	<%current_user.errors.each do |key, value|%>
+	errors += "<li><label class='error' for='website_url' generated='true' style='display: block;'><%= value %>.</label></li>"; 
+	<%end%>
+	jQuery("#errorContent").html(errors);	
+	jQuery("#showErrors").click();
+}else{
+	jQuery("#card_type").val("");
+	jQuery("#card_number").val("");
+	jQuery("#cvc").val("");
+	jQuery("#month").val(0);
+	jQuery("#year").val(0);
+	jQuery("#editBillingInfoBtn").click();
+	jQuery("#arbStatusMsg").hide();
+}
+

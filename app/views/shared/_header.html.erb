@@ -1,0 +1,28 @@
+<div id="header" class="span-32 last" style="color:#FFFFFF">
+	<% if user_signed_in? %>
+	<div class="userOptions">
+		<a id="flat" tabindex="0" href="#user-options" class="fg-button" > <span class="fb-icon"></span>Welcome <%= current_user.email %></a>
+		<div id="user-options" class="hidden">
+			<ul>
+				<li>
+					<%= link_to("Account Settings", account_settings_path, :class => "marginLeft5") %>
+				</li>
+				<li>
+					<%= link_to("Sign out", destroy_user_session_path,:class => "marginLeft5", :method => :delete ) %>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<%elsif params[:action] == 'about' or params[:action] == 'privacyPolicy' or params[:action] == 'termsOfService' or params[:action] == 'help'%>
+	<div class="userOptions">
+		<br />
+		<%=link_to("Sign In", "/", :class => "fg-button") %>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<%=link_to("Sign Up Now", { :controller=> "admin/signup", :protocol => "http://", :action => "step1"}, :class => "fg-button") %>
+	</div>	
+	
+	<% end %>
+	
+	
+	
+</div>

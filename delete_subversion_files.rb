@@ -1,0 +1,1 @@
+system("find . -depth -type d -name .svn -exec rm -rf {} \\;")

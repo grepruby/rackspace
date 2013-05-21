@@ -1,0 +1,64 @@
+//reset the errors from the past
+jQuery('#special_title').removeClass("error");
+jQuery('#special_details').removeClass("error");
+jQuery('#special_start_date').removeClass("error");
+jQuery('#special_end_date').removeClass("error");
+
+jQuery("#myInfoContent").hide();
+// verify if is necesary to disable the addbutton
+if (<%=session[:specials].length%> < 5){
+	jQuery('#addSpecialBtn').show();
+	jQuery('#addSpecialBtn').removeAttr('disabled');
+}else{
+	jQuery('#addSpecialBtn').hide();
+	jQuery('#addSpecialBtn').attr('disabled', 'disabled');
+}
+// verify if is necesary to disable the deletebutton	
+if (<%=session[:specials].length%> > 1){
+	jQuery('#deleteSpecialBtn').show();
+	jQuery('#deleteSpecialBtn').removeAttr('disabled');
+	jQuery('#deleteSpecialBtn').click(function() {jQuery("#showDeleteConfirmationPopup").click();});
+}
+else{
+	jQuery('#deleteSpecialBtn').hide();
+	jQuery('#deleteSpecialBtn').attr('disabled', 'disabled');
+	jQuery('#deleteSpecialBtn').unbind('click');
+}
+jQuery('#specialsNav').empty();
+<% session[:specials].each_with_index  do |special,index| %>
+	<%if index==0%>
+		jQuery('#specialsNav').append("<input type='submit' value='' name='special<%=index%>Btn' id='special<%=index%>Btn' class='special<%=index%>Selected'>");
+		jQuery('#specialSelected').val(<%=index%>)
+	<%else%>
+		jQuery('#specialsNav').append("<input type='submit' value='' name='special<%=index%>Btn' id='special<%=index%>Btn' class='special<%=index%>'>");
+	<%end%>
+	jQuery('#special<%=index%>Btn').click(function() {if (jQuery("#specialForm").valid()){showSpinner('iphone');jQuery('#formAction').val('<%=index%>');}else{jQuery("#showErrors").click();}});
+<% end %>
+//Clear the upload file component
+jQuery("#specialForm")[0].reset();
+setSpecialFormFields(1, "<%= session[:specials][params[:specialSelected].to_i].label_title %>", 
+								"<%= session[:specials][params[:specialSelected].to_i].details_n %>",
+								"<%= session[:specials][params[:specialSelected].to_i].try(:label_start_date) %>",
+								"<%= session[:specials][params[:specialSelected].to_i].try(:label_end_date) %>",
+								'<%= session[:specials][params[:specialSelected].to_i].try(:tags_without_n) %>');
+
+if ( "<%=session[:specials][params[:specialSelected].to_i].try(:photo_file_name)%>" != "")
+{
+	jQuery("#special_photo_name_chk").show();	
+	jQuery("#special_photo_name").text("<%= session[:specials][params[:specialSelected].to_i].try(:photo_file_name)%>");
+	jQuery("#special_photo_name").show();
+	jQuery("#photoSpecialNameSpace").show();
+}else
+{
+	jQuery("#special_photo_name_chk").hide();	
+	jQuery("#special_photo_name").text("");
+	jQuery("#special_photo_name").hide();
+	jQuery("#photoSpecialNameSpace").hide();	
+}			
+//change buttons
+jQuery("#myInfoBtnSelected").replaceWith("<%= escape_javascript(link_to('',{:controller => 'admin', :action => 'my_info'}, {:id=>'myInfoBtn', :class=>'arialUln12pt291911', :remote => true})) %>");
+jQuery("#specialsBtn").replaceWith("<div id='specialsBtnSelected'></div>");
+//remove old content and add the my info
+jQuery("#specialsContent").show();
+//Replace the right panel
+jQuery("#rightPanel").html("Iphone<br />Specials");

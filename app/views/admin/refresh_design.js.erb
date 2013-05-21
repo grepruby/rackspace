@@ -1,0 +1,10 @@
+//refresh preview section
+jQuery.watermark.showAll();
+jQuery("#restaurantName").html("<%= truncate(@restaurant.name, :length => 20).html_safe.gsub(/\"/, "\\\"") unless @restaurant.nil?%>")
+jQuery("#restaurantPhone").html("<%= @restaurant.phone_number%>")
+jQuery("#restaurantWebsite").html("<%= raw(truncate(@restaurant.website, :length => 26)) unless @restaurant.nil?%>")
+jQuery("#restaurantPhoto").html("<img alt=''  src='<%= @tempfile.photo.url unless @tempfile.nil?  %>'></img>")
+//hide spinner
+hideSpinner('iphone');
+
+

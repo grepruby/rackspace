@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<%= render :partial => "/shared/head" %>
+	
+	<body >
+		<%= render :partial => "/shared/header" %>
+		<% if params[:controller] == 'admin/signup' or params[:controller] == 'Admin' or params[:controller] == 'admin' or params[:controller] == 'content' or params[:controller] == 'account_settings' %>
+		<a href='/'><div id="headerLogo"></div></a>
+		<% end %>
+		<div class="container">
+			<%= yield %>
+			<br />&nbsp;
+		</div>
+		
+		<%= render :partial => "/shared/footer" %>
+	</body>
+</html> 

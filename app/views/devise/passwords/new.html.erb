@@ -1,0 +1,80 @@
+<div id="signinLeftPanel" class="span-17">
+	<div></div>
+	<p class="arial15ptEAE8E0">
+		<%= Restaurant::HOSTESSMESSAGE %>
+	</p>
+</div>
+<% if resource.errors[:email].empty? %>
+<div id="signinPanel" class="span-15 last">
+	<div id="napkinTopSmall"></div>
+	<div id="napkinMiddleSmall">
+		<h2 class="lora28pt68804D paddingTop40">Forgot Password
+		<br />
+		</h2>
+		<br />
+		<hr size="6" align="center">
+		<hr size="4" align="center">
+		<br />
+		<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+		<div>
+			<%= f.text_field :email,{:class=>"arial12pt808080 textInput marginTop15 marginLeft25",:id => "fieldForgotPassword", :placeholder => "Enter Email Address"} %>
+		</div>
+		<div>
+			<br />
+		</div>
+		<br />
+		<br />
+		<div>
+			<%= f.submit("", :id=> "forgotPasswordBtn") %>
+		</div>
+		<br />
+		<% resource.errors.each do |name, msg| %> <span class="arial15ptBE1E2D"><%= msg%></span>
+		<% end %>
+		<% end %>
+		<br />
+		<hr size="6" align="center">
+		<hr size="4" align="center">
+		<br />
+		<div>
+			<%= link_to("Learn More", { :controller=> "/content", :protocol => "http://", :action => "about"}, :class => "arialUln16pt291911") %>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<%= link_to("Sign Up Now", { :controller=> "admin/signup", :protocol => "http://", :action => "step1"}, :class => "arialUln16pt68804D") %>
+		</div>
+	</div>
+	<div id="napkinBottomSmall"></div>
+</div>
+<%else%>
+<div id="signinPanel" class="span-15 last">
+	<div id="napkinTopSmall"></div>
+	<div id="napkinMiddleSmall">
+		<h2 class="lora28pt68804D paddingTop40">Wrong Email?
+		<br />
+		</h2>
+		<br />
+		<hr size="6" align="center">
+		<hr size="4" align="center">
+		<br />
+		<div id="textWrongPassword" class="arial16pt808080 marginLeft50 marginTop5">
+			We did not recognize the
+			Email Address you entered. Try
+			re-entering your Email Address
+		</div>
+		<form action='<%= new_password_path(resource_name)%>' method="GET">
+			<input type="submit" value="" id="TryAgainforgotPasswordBtn" class="marginTop30 marginLeft65">
+		</form>
+		<div></div>
+		<br />
+		<hr size="6" align="center">
+		<hr size="4" align="center">
+		<br />
+		<div>
+			<%= link_to("Learn More", { :controller=> "/content", :protocol => "http://", :action => "about"}, :class => "arialUln16pt291911") %>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<%= link_to("Sign Up Now", { :controller=> "admin/signup", :protocol => "http://", :action => "step1"}, :class => "arialUln16pt68804D") %>
+		</div>
+	</div>
+	<div id="napkinBottomSmall"></div>
+</div>
+<% end %>

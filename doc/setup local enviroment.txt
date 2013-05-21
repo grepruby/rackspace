@@ -1,0 +1,23 @@
+Install local enviromet
+
+1. Download and install ruby 1.8.7
+
+2. Using eclipse
+	2. Download eclipse
+	2.1 Install aptana plugin in eclipse: http://download.aptana.com/studio3/plugin/install
+	2.2 Install subclipse pluging
+
+2. Using Aptana Studio
+	2. Download and isntall Aptana studio
+	2.1 Install subclipse pluging
+
+
+3. Checkout project: click New project from SVN
+4. setup the database.yml
+
+
+
+----------------------
+Scripts
+
+rails generate migration AddPartNumberToProducts

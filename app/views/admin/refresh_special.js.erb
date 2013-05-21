@@ -1,0 +1,123 @@
+var action = '<%=params[:formAction]%>';
+var actionDelete = '<%=params[:deleteFormAction]%>';
+if (actionDelete == 'deleteSpecial') {
+	action = actionDelete
+}
+	
+// verify if is necesary to disable the addbutton
+if (<%=session[:specials].length%> < 5){
+	jQuery('#addSpecialBtn').show();
+	jQuery('#addSpecialBtn').removeAttr('disabled');
+}
+else{
+	jQuery('#addSpecialBtn').hide();
+	jQuery('#addSpecialBtn').attr('disabled', 'disabled');
+}	
+// verify if is necesary to disable the deletebutton	
+if (<%=session[:specials].length%> > 1){
+	jQuery('#deleteSpecialBtn').show();
+	jQuery('#deleteSpecialBtn').removeAttr('disabled');
+	jQuery('#deleteSpecialBtn').click(function() {jQuery("#showDeleteConfirmationPopup").click();});
+	}
+else{
+	jQuery('#deleteSpecialBtn').hide();
+	jQuery('#deleteSpecialBtn').attr('disabled', 'disabled');
+	jQuery('#deleteSpecialBtn').unbind('click');
+}
+switch(action){
+	case "addSpecial":
+		jQuery("#specialForm").validate().cancelSubmit = true;
+		jQuery('#special0Btn').unbind('click');jQuery('#special1Btn').unbind('click');jQuery('#special2Btn').unbind('click');jQuery('#special3Btn').unbind('click');jQuery('#special4Btn').unbind('click');
+		jQuery('#specialsNav').empty();
+		//clean fields
+		jQuery("#specialForm")[0].reset();setWatermarksForSpecial();
+		<% session[:specials].each_with_index  do |special,index| %>
+			<%if index==params[:specialSelected]%>
+				jQuery('#specialsNav').append("<input type='submit' value='' name='special<%=index%>Btn' id='special<%=index%>Btn' class='special<%=index%>Selected'>");
+				jQuery('#specialSelected').val(<%=index%>)
+				jQuery('#specialSelectedOnDelete').val(<%=index%>)				
+			<%else%>
+				jQuery('#specialsNav').append("<input type='submit' value='' name='special<%=index%>Btn' id='special<%=index%>Btn' class='special<%=index%>'>");
+			<%end%>
+			jQuery('#special<%=index%>Btn').click(function() {if (jQuery("#specialForm").valid()){showSpinner('iphone');jQuery('#formAction').val('<%=index%>');}else{ jQuery("#showErrors").click();}});
+		<% end %>
+		//When the add special button was clicked the preview section must be empty
+		jQuery("#specialTitle").html("");
+		jQuery("#specialDescription").html("");	
+		jQuery('#specialNumbTitle').html('Featured Special ' + '<%= session[:specials].length %>');
+		break;
+	case "deleteSpecial":
+		jQuery('#special0Btn').unbind('click');jQuery('#special1Btn').unbind('click');jQuery('#special2Btn').unbind('click');jQuery('#special3Btn').unbind('click');jQuery('#special4Btn').unbind('click');
+		jQuery('#specialsNav').empty();
+		<% session[:specials].each_with_index  do |special,index| %>
+			<%if index==params[:specialSelectedOnDelete].to_i%>
+			jQuery('#specialsNav').append("<input type='submit' value='' name='special<%=index%>Btn' id='special<%=index%>Btn' class='special<%=index%>Selected'>");
+			jQuery('#specialSelected').val(<%=index%>);
+			jQuery('#specialSelectedOnDelete').val(<%=index%>)
+			<%else%>
+			jQuery('#specialsNav').append("<input type='submit' value='' name='special<%=index%>Btn' id='special<%=index%>Btn' class='special<%=index%>'>");
+			<%end%>
+			jQuery('#special<%=index%>Btn').click(function() {if (jQuery("#specialForm").valid()){showSpinner('iphone');jQuery('#formAction').val('<%=index%>');}else{ jQuery("#showErrors").click();}});
+		<% end %>
+		//Clear the upload file component
+		jQuery("#specialForm")[0].reset();setWatermarksForSpecial();
+		//set fields
+		setSpecialFormFields(<%= params[:specialSelectedOnDelete].to_i + 1%>, "<%= session[:specials][params[:specialSelectedOnDelete].to_i].label_title %>", 
+								"<%= session[:specials][params[:specialSelectedOnDelete].to_i].details_n %>",
+								"<%= session[:specials][params[:specialSelectedOnDelete].to_i].try(:label_start_date) %>",
+								"<%= session[:specials][params[:specialSelectedOnDelete].to_i].try(:label_end_date) %>",
+								"<%= session[:specials][params[:specialSelectedOnDelete].to_i].label_tags %>");
+		jQuery("#specialTitle").html("<%= session[:specials][params[:specialSelectedOnDelete].to_i].label_title %>")
+		jQuery("#specialDescription").html("<%= session[:specials][params[:specialSelectedOnDelete].to_i].try(:details_formatted) %>")
+		break;
+	case "previewSpecial":
+		jQuery('#previewSpecialBtn').removeAttr('disabled');
+	case "saveSpecial":
+		jQuery("#specialTitle").html("<%= session[:specials][params[:specialSelected].to_i].label_title %>")
+		jQuery("#specialDescription").html("<%= session[:specials][params[:specialSelected].to_i].try(:details_formatted) %>")
+		jQuery('#saveSpecialBtn').removeAttr('disabled');
+		if ("<%=@show_notifications_confirmation %>" == "true"){jQuery("#showSendNotificationsConfirmationPopup").click();}
+	case "sendUpdateNotifications":
+		break;
+	case "no_action":
+		break;
+	default:
+		jQuery('#specialSelected').val(<%= params[:specialSelected].to_i%>)
+		jQuery('#specialSelectedOnDelete').val(<%= params[:specialSelected].to_i%>)
+		//refresh preview section
+		if (jQuery('#special0Btn').hasClass('special0Selected')) { jQuery('#special0Btn').toggleClass('special0Selected special0');}
+		if (jQuery('#special1Btn').hasClass('special1Selected')) { jQuery('#special1Btn').toggleClass('special1Selected special1');}
+		if (jQuery('#special2Btn').hasClass('special2Selected')) { jQuery('#special2Btn').toggleClass('special2Selected special2');}
+		if (jQuery('#special3Btn').hasClass('special3Selected')) { jQuery('#special3Btn').toggleClass('special3Selected special3');}
+		if (jQuery('#special4Btn').hasClass('special4Selected')) { jQuery('#special4Btn').toggleClass('special4Selected special4');}
+		jQuery('#<%= @selected%>Btn').toggleClass('<%= @selected%> <%=@selected%>Selected');
+		//Clear the upload file component
+		jQuery("#specialForm")[0].reset();setWatermarksForSpecial();
+		//set fields
+		setSpecialFormFields(<%= params[:specialSelected].to_i + 1%>, "<%= session[:specials][params[:specialSelected].to_i].label_title %>", 
+								"<%= session[:specials][params[:specialSelected].to_i].details_n %>",
+								"<%= session[:specials][params[:specialSelected].to_i].try(:label_start_date) %>",
+								"<%= session[:specials][params[:specialSelected].to_i].try(:label_end_date) %>",
+								'<%= session[:specials][params[:specialSelected].to_i].try(:tags_without_n) %>');
+		jQuery("#specialTitle").html("<%= session[:specials][params[:specialSelected].to_i].label_title %>");
+		jQuery("#specialDescription").html("<%= session[:specials][params[:specialSelected].to_i].try(:details_formatted) %>");
+		break;
+}
+if ( "<%=session[:specials][params[:specialSelected].to_i].try(:photo_file_name)%>" != "")
+{
+	jQuery("#special_photo_name_chk").show();	
+	jQuery("#special_photo_name").text("<%= session[:specials][params[:specialSelected].to_i].try(:photo_file_name)%>");
+	jQuery("#special_photo_name").show();
+	jQuery("#photoSpecialNameSpace").show();
+}else
+{
+	jQuery("#special_photo_name_chk").hide();	
+	jQuery("#special_photo_name").text("");
+	jQuery("#special_photo_name").hide();
+	jQuery("#photoSpecialNameSpace").hide();	
+}		
+//hide spinner
+hideSpinner('iphone');
+jQuery('#formAction').val('');
+jQuery(".error").removeClass("error");
+jQuery('#specialVvalidator').resetForm();

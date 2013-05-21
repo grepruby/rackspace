@@ -1,0 +1,152 @@
+<%= render :partial => "/shared/navMenu" %>
+
+<div id="accountSettings">
+	<h1 class="lora28ptEFE7D3">Account Settings</h1>
+	<hr align="center" class='separation2px'>
+	<hr align="center" class='separation1px'>
+	<div class="span-2">&nbsp;</div>
+	<div class="content span-24">
+		<br />
+		<br />
+		<div id="napkinTopLong"></div>
+		<div id="napkinMiddleLong">
+			<div id="accordionSettings" class="accordion">
+				<%= form_tag({:controller => "account_settings", :action => "update_name", :protocol => "http://"}, {:id => 'nameForm', :remote => true}) do %>
+				<h3 class="ui-accordion-header accordion_bottom_border ui_accordion_bottom_border">
+					<div class="loraBld16ptEFE7D3 ui-accordion-label">Name</div>
+					<div id="nameLbl" class="lora14ptEFE7D3 ui-accordion-field"><%= current_user.name%></div>
+					<div id="editNameBtn" class="lora14ptEFE7D3 ui-accordion-actions">Edit</div>
+					<input class="lora14ptEFE7D3 ui-accordion-done" type="submit" value="Done" style="display: none" name="commit">
+					<div style="clear:both"></div>
+				</h3>
+				<div class="accordion-content arial16pt291911 ui_accordion_bottom_border" style="display: none;">
+					<%= text_field_tag(:first_name, current_user.first_name , {:class=>"arial12pt808080 txtInput"}) %><br /><br />
+					<%= text_field_tag(:last_name, current_user.last_name , {:class=>"arial12pt808080 txtInput"}) %>
+				</div>
+				<% end %>
+				
+				<%= form_tag({:controller => "account_settings", :action => "update_email", :protocol => "http://"}, {:id => 'emailForm', :remote => true}) do %>
+				<h3 class="ui-accordion-header accordion_bottom_border ui_accordion_bottom_border">
+					<div class="loraBld16ptEFE7D3 ui-accordion-label">Email</div>
+					<div id="usernameLbl" class="lora14ptEFE7D3 ui-accordion-field"><%= current_user.email%></div>
+					<div id="editEmailBtn" class="lora14ptEFE7D3 ui-accordion-actions">Edit</div>
+					<input class="lora14ptEFE7D3 ui-accordion-done" type="submit" value="Done" style="display: none" name="commit">
+					<div style="clear:both"></div>
+				</h3>
+				<div class="accordion-content arial16pt291911 ui_accordion_bottom_border" style="display: none;">
+					<%= text_field_tag(:new_username, "" , {:class=>"arial12pt808080 txtInput"}) %><br /><br />
+					<%= text_field_tag(:new_username_confirmation, "" , {:class=>"arial12pt808080 txtInput"}) %>
+				</div>
+				<% end %>
+				<%= form_tag({:controller => "account_settings", :action => "update_subscription", :protocol => "http://"}, {:id => 'subscriptionForm', :remote => true}) do %>
+					<%= hidden_field_tag('cancelSubscription', false) %>
+				<h3 class="ui-accordion-header accordion_bottom_border ui_accordion_bottom_border">
+					<div class="loraBld16ptEFE7D3 ui-accordion-label">Subscription Plan</div>
+					<div id="usernameLbl" class="lora14ptEFE7D3 ui-accordion-field">$39.95</div>
+					<div id="editSubscriptionBtn" class="lora14ptEFE7D3 ui-accordion-actions">Edit</div>
+					<input class="lora14ptEFE7D3 ui-accordion-done" type="submit" value="Done" style="display: none" name="commit">
+					<div style="clear:both"></div>
+				</h3>
+				<div class="accordion-content arial16pt291911 ui_accordion_bottom_border" style="display: none;">
+					<p class="lora14ptEFE7D3">
+						Built passionately with both the merchant and app user in mind, Hostess lets you 
+						advertise your business effectively at a fraction of traditional costs.	With our dynamic online 
+						campaign builder, you can create and edit special information in real-time. 
+						Engage with guests like never before. We are certain you will benefit using Hostess. Don't worry,
+						if you're not 100% pleased, cancel at any time. For only $39.95 a month, Hostess is a true value.
+						<br /><br />
+						To learn more about how our features can help you, <%= link_to "Click here.", { :controller => "/content", :protocol => "http://", :action => "about"}, :class => "arialUln12pt291911" %>
+					</p>
+					<div class="subscriptionLeftPanel">
+						<table>
+							<tr class="arialBld14pt291911">
+								<td class="tableHeader">$39.95 Monthly Subscription</td>
+							</tr>
+							<tr>
+								<td class="tdBorderRight">
+									<ul class="arialBld12pt8CA671">
+										<li>Restaurant Photo</li>
+										<li>Basic Featured Specials</li>
+										<li>Full Screen Specials</li>
+										<li>Sound Customizing</li>
+										<li>Business Analytics</li>	
+									</ul>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="subscriptionRightPanel"><div id="cancelSubscriptionBtn"></div></div>
+					<div style="clear:both"></div>
+				</div>
+				<% end %>
+				<%= form_tag({:controller => "account_settings", :action => "update_password", :protocol => "http://"}, {:id => 'passwordForm', :remote => true}) do %>
+				<h3 class="ui-accordion-header accordion_bottom_border ui_accordion_bottom_border">
+					<div class="loraBld16ptEFE7D3 ui-accordion-label">Password</div>
+					<div class="lora14ptEFE7D3 ui-accordion-field">**********</div>
+					<div id="editPasswordBtn" class="lora14ptEFE7D3 ui-accordion-actions">Edit</div>
+					<input class="lora14ptEFE7D3 ui-accordion-done" type="submit" value="Done" style="display: none" name="commit">
+					<div style="clear:both"></div>
+				</h3>
+				<div class="accordion-content arial16pt291911 ui_accordion_bottom_border" style="display: none;">
+					<div class="arial12ptE1DBBF passwordAdvise">Passwords are case-sensitive and must be at least 6 characters.</div>
+					<%= password_field_tag(:current_password, "", {:class=>"arial12pt808080 txtInput"}) %><br /><br /><br />
+					
+					<%= password_field_tag(:newPassword, "", {:class=>"arial12pt808080 txtInput"}) %><br /><br />
+					<%= password_field_tag(:newPassword_confirmation, "", {:class=>"arial12pt808080 txtInput"}) %>
+				</div>
+				<% end %>
+				<%= form_tag({:controller => "account_settings", :action => "update_billing_info", :protocol => "http://"}, {:id => 'billing_info_Form', :remote => true}) do %>
+				<h3 class="ui-corner-bottom ui-accordion-header">
+					<div class="loraBld16ptEFE7D3 ui-accordion-label">Billing Information</div>
+					<div class="lora14ptEFE7D3 ui-accordion-field">&nbsp;</div>
+					<div id="editBillingInfoBtn" class="lora14ptEFE7D3 ui-accordion-actions">Edit</div>
+					<input class="lora14ptEFE7D3 ui-accordion-done" type="submit" value="Done" style="display: none" name="commit">
+					<div style="clear:both"></div>
+				</h3>
+				<div class="accordion-content arial16pt291911 ui_accordion_bottom_border" style="display: none;border-top: 1px solid;">
+					<%= text_field_tag(:fullname, current_user.billing_information.full_name, {:class => "arial12pt808080 fullNametxt spanRight"}) %>
+					<%= select_tag(:card_type, "<option>Visa</option><option>Mastercard</option>".html_safe, {:prompt=>"Select Card Type", :class=>"arial12pt808080 cardTypeCmb"}) %>
+					<br /><br />
+					<%= text_field_tag(:card_number, "", {:class => "arial12pt808080 cardCitytxt spanRight"}) %>
+					<%= text_field_tag(:cvc, "", {:class => "arial12pt808080 cvctxt spanRight"}) %>
+					<span>EXP:&nbsp;&nbsp;</span>
+					<%= select_tag(:month, "<option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option>".html_safe, {:prompt=>"MM", :class=>"arial12pt808080 spanRight"}) %>
+					<%= select_tag(:year, "<option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option>".html_safe, {:prompt=>"YY", :class=>"arial12pt808080"}) %>
+					<br /><br />
+					<%= text_field_tag(:billing_address_1, current_user.billing_information.billing_address_1, {:class => "arial12pt808080 billingAddtxt"}) %>
+					<br /><br />
+					<%= text_field_tag(:billing_address_2, current_user.billing_information.billing_address_2, {:class => "arial12pt808080 billingAddtxt"}) %>
+					<br /><br />
+					<%= text_field_tag(:city, current_user.billing_information.city, {:class => "arial12pt808080 cardCitytxt spanRight"}) %>
+					<%= select_tag(:state, options_from_collection_for_select(State.all, :id, :name, :selected => current_user.billing_information.state_id), {:prompt=>"Select State", :class=>"arial12pt808080 spanRight selectState"}) %>
+					<%= text_field_tag(:zip	, current_user.billing_information.zip, {:class => "arial12pt808080 ziptxt"}) %>
+				</div>
+				<% end %>
+			</div>
+		</div>
+		<div id="napkinBottomLong">&nbsp;</div>
+	</div>
+	<div class="span-2 last"></div>
+</div>
+<script type="text/javascript">
+	jQuery().ready(function(){
+		jQuery("#editNameBtn").click(function(){if (jQuery("#editNameBtn").text() == "Edit"){jQuery("#first_name").val('<%= current_user.first_name %>');jQuery("#last_name").val("<%= current_user.last_name%>");}});
+		jQuery("#editEmailBtn").click(function(){if (jQuery("#editEmailBtn").text() == "Edit"){jQuery("#new_username_confirmation").val("");jQuery("#new_username").val("");}});
+		jQuery("#editPasswordBtn").click(function(){if (jQuery("#editPasswordBtn").text() == "Edit"){jQuery("#current_password").val("");jQuery("#newPassword").val(""); jQuery("#newPassword_confirmation").val("");}});
+		
+		jQuery("#editBillingInfoBtn").click(function(){
+			if (jQuery("#editBillingInfoBtn").text() == "Edit"){
+				jQuery("#fullname").val("<%=current_user.billing_information.full_name%>");
+				jQuery("#billing_address_1").val("<%=current_user.billing_information.billing_address_1%>");
+				jQuery("#billing_address_2").val("<%=current_user.billing_information.billing_address_2%>");
+				jQuery("#city").val("<%=current_user.billing_information.city%>");
+				jQuery("#state").val("<%=current_user.billing_information.state_id%>");
+				jQuery("#zip").val("<%=current_user.billing_information.zip%>");
+			}
+		});
+		
+		
+	});
+</script>
+<%= render :partial => "/shared/errors_popup" %>
+<%= render :partial => "/shared/cancel_subscription_confirmation_popup" %>

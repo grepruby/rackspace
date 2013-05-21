@@ -1,0 +1,51 @@
+<% content_for :head do %>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		<%= render :partial => "/shared/allow_tutorial_popup.js" %>		
+	});
+</script>
+<%end%>
+<%= render :partial => "/shared/navMenu" %>
+<div id="design">
+	<h1 class="lora28ptEFE7D3">Design Your Promo</h1>
+	<hr align="center" class='separation2px'>
+	<hr align="center" class='separation1px'>
+	
+	<div id="lefPanel" class="span-15">
+		<div id="napkinTopSmall"></div>
+		<div id="napkinMiddleSmall">
+			<div class="designNavMenu">
+				<div id="myInfoBtnSelected"></div>
+				<%= link_to("",{:controller => "admin", :action => "specials"}, {:id=>"specialsBtn", :class=>"arialUln12pt291911", :remote => true}) %>
+			</div>
+			<div id="myInfoContent">
+				<%= render :partial => "/admin/my_info" %>
+			</div>
+			<div id="specialsContent" style="display: none">
+				<%= render :partial => "/admin/specials" %>
+			</div>
+			<div id="tutorialPopUp" style="display:none">
+				<%= render :partial => "/shared/tutorial" %>
+			</div>
+		</div>
+		<div id="napkinBottomSmall"></div>
+	</div>
+	<div class="rightPanel span-14 last">
+		<div id="iphone">
+			<div id="restaurantPhoto"class="photoDiv"><%= raw("<img alt='#{@restaurant.name}' src='#{@restaurant.photo_url_small}'>") if !@restaurant.photo.nil? %></div>
+			<div id="restaurantName" class="name arialBld22ptE1DBBF"><%=raw(truncate(@restaurant.name, :length => 20)) unless @restaurant.nil?  %></div>
+			<div id="specialTitle" class="title arialBld14ptE1DBBF">
+				<%=@restaurant.specials.first.try(:title) unless @restaurant.specials.nil? and @restaurant.specials.length > 0%>
+			</div>
+			<div id="specialDescription" class="description arial11ptB3B3B3">
+				<%=@restaurant.specials.first.try(:details_formatted) unless @restaurant.specials.nil? and @restaurant.specials.length > 0%>
+			</div>
+			<div class="vspace"></div>
+			<div id="restaurantPhone" class="iphoneButtons arialBld20ptE1DBBF"><%=@restaurant.try(:phone_number)%></div>
+			<div id="restaurantWebsite" class="iphoneButtons arialBld20ptE1DBBF"><%=raw(truncate(@restaurant.website, :length => 24)) unless @restaurant.nil?%></div>
+		</div>
+	</div>
+</div>
+<%= render :partial => "/shared/errors_popup" %>
+<%= render :partial => "/shared/delete_confirmation_popup" %>
+<%= render :partial => "/shared/send_notifications_confirmation_popup" %>

@@ -1,0 +1,17 @@
+<div class="navMenu">
+	<%unless current_user.nil?%>
+		<%if params[:action] == 'design'%>
+		<div class="designMenuBtnSelected"></div>
+		<%= link_to("", { :controller => "admin", :protocol => "http://", :action => "analytics"}, :class => "analyticsMenuBtn") %>
+		<%elsif params[:action] == 'analytics'%>
+		<%= link_to("", { :controller => "admin", :protocol => "http://", :action => "design"}, :class => "designMenuBtn") %> <div class="analyticsMenuBtnSelected"></div>
+		<%else%>
+		<%= link_to("", { :controller => "admin", :protocol => "http://", :action => "design"}, :class => "designMenuBtn") %>
+		<%= link_to("", { :controller => "admin", :protocol => "http://", :action => "analytics"}, :class => "analyticsMenuBtn") %>
+		<%end%>
+		<%if current_user.arb_status != AuthorizeNet::ARB::Subscription::Status::ACTIVE %>
+		<div id="arbMessage" class="arial14ptEFE7D3 ">* Your account has <span style="color:red;">expired</span>. Please update your billing information in <%= link_to("Account Settings", account_settings_path, :class => "arialUln14pt8CA671") %>.</div>
+		<%end%>
+	<%end%>
+	
+</div>

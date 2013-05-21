@@ -1,0 +1,14 @@
+if (<%= current_user.errors.length > 0%>){
+	var errors = "";
+	<%current_user.errors.each do |key, value|%>
+	errors += "<li><label class='error' for='website_url' generated='true' style='display: block;'><strong><%= key.to_s.capitalize %></strong>&nbsp;<%= value %>.</label></li>"; 
+	<%end%>
+	jQuery("#errorContent").html(errors);	
+	jQuery("#showErrors").click();
+}else{
+	jQuery("#username").val("");
+	jQuery("#username_confirmation").val("");
+	jQuery("#usernameLbl").html("<%=current_user.email%>");
+	jQuery("#editEmailBtn").click();
+}
+	

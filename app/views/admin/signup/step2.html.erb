@@ -1,0 +1,60 @@
+<div id="signUpPanel" class="span-32">
+	<div class="span-32 last signupNav">
+		<div class="step1Inactive"></div>
+		<div class="step2Active"></div>
+		<div class="step3Inactive"></div>
+	</div>
+	<h1 class="lora28ptEFE7D3">Sign Up for Hostess</h1>
+	<hr align="center" class='separation2px'>
+	<hr align="center" class='separation1px'>
+	<h2 class="loraItalic16pt8CA671">Select Monthly Subscription</h2>
+	<div id="napkinTopLong" class="centerDiv"></div>
+	<div id="napkinMiddleLong" class="centerDiv">
+		<%= form_tag({:protocol => "http://", :controller => "admin/signup", :action => "step3", :only_path => false}, :id => 'step2Form') do %>
+		<div class="step2LeftPanel">
+			<p class="arial12pt8CA671">
+				Built passionately with both the merchant and app user in mind, Hostess lets you 
+				advertise your business effectively at a fraction of traditional costs. With our online 
+				editing client, you can create and edit specials in no time, saving you time, and giving 
+				your customers deals they can't resist. Don't worry, if Hostess isn't right for you, 
+				you're welcome to cancel at any time. For only $39.95 a month, it's no wonder 
+				businesses are flocking to Hostess.
+				<br /><br />
+				To learn more about how our features can help you, <%= link_to "Click here.", { :controller => "/content", :protocol => "http://", :action => "about"}, :class => "arialUln12pt291911" %>
+			</p>
+			<p class="arialBld16pt8CA671">Free trial for 60 days!</p>
+		</div>
+		<div class="step2RightPanel arialBld14pt291911">
+			<table>
+				<tr class="arialBld14pt291911">
+					<td class="tableHeader">$39.95 Monthly Subscription</td>
+				</tr>
+				<tr>
+					<td class="tdBorderRight">
+						<ul class="arialBld12pt8CA671">
+							<li>Restaurant Photo</li>
+							<li>Basic Featured Specials</li>
+							<li>Full Screen Specials</li>
+							<li>YouTube Video</li>
+							<li>Business Analytics</li>	
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<br />
+		<div class="step1ErrosDiv">
+			<% if session[:errors] %>
+			<ul>
+				<% session[:errors].each do |key, value| %>
+			    <li> <strong><%= key %></strong>&nbsp;<%= value %></li>	
+			    <% end %>
+			</ul>
+			<% end %>
+		</div>
+		
+		<%= submit_tag("", {:disable_with => "", :id => "nextBtn"}) %>
+		<% end %>
+	</div>
+	<div id="napkinBottomLong" class="centerDiv"></div>
+</div>

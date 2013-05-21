@@ -1,0 +1,100 @@
+<%= render :partial => "/shared/navMenu" %>
+<div id="analytics">
+	<h1 class="lora28ptEFE7D3">Progress View</h1>
+	<hr align="center" class='separation2px'>
+	<hr align="center" class='separation1px'>
+	<div class="span-2">&nbsp;</div>
+	<div class="content span-24">
+		<br />
+		<span class="arial16ptEFE7D3"> Use your analytics to maximize the effectiveness of your specials. Finding what 
+			specials spike interest turn users into customers, and customers into fans. </span>
+		<br />
+		<div id="napkinTopLong"></div>
+		<div id="napkinMiddleLong">
+			<div id="accordion" class="accordion">
+				<h3 class="ui-corner-top ui-accordion-header">
+					<a href="#" class="loraBld16ptEFE7D3">Appearances in search results</a>
+					<span class="ui-icon ui_accordion_open_icon"></span>
+				</h3>
+				<div class="accordion-content arial16pt291911" style="display: none;">
+					<% if @searchs.length == 0 %>
+						<div class="no_results_label">There are no results to display.</div>
+					<%else%>
+						<% @searchs.each  do |analityc| %>
+						<div class="<%= cycle("ui_accordion_row_pair","ui_accordion_row_odd")%>">
+							<span class="month_label"><%=analityc.month%></span><span class="total_label"><%=analityc.total%></span>
+						</div>
+						<%end %>
+					<%end %>
+				</div>
+				<h3 class="ui-accordion-header ui_accordion_top_border">
+					<a href="#" class="loraBld16ptEFE7D3">My Restaurant pages viewed</a>
+					<span class="ui-icon ui_accordion_open_icon"></span>
+				</h3>
+				<div class="accordion-content arial16pt291911" style="display: none;">
+					<% if @page_views.length == 0 %>
+						<div class="no_results_label">There are no results to display.</div>
+					<%else%>
+						<% @page_views.each  do |analityc| %>
+							<div class="<%= cycle("ui_accordion_row_pair","ui_accordion_row_odd")%>">
+								<span class="month_label"><%=analityc.month%></span><span class="total_label"><%=analityc.total%></span>
+							</div>
+						<%end %>
+					<%end %>
+				</div>
+				<h3 class="ui-accordion-header ui_accordion_top_border">
+					<a href="#" class="loraBld16ptEFE7D3">My Restaurant added to favorites</a>
+					<span class="ui-icon ui_accordion_open_icon"></span>
+				</h3>
+				<div class="accordion-content arial16pt291911" style="display: none;">
+					<% if @resturant_in_favorite.length == 0 %>
+						<div class="no_results_label">There are no results to display.</div>
+					<%else%>
+						<% @resturant_in_favorite.each  do |analityc| %>
+							<div class="<%= cycle("ui_accordion_row_pair","ui_accordion_row_odd")%>">
+								<span class="month_label"><%=analityc.month%></span><span class="total_label"><%=analityc.total%></span>
+							</div>
+						<%end %>
+					<%end %>
+				</div>
+				<h3 class="ui-accordion-header ui_accordion_top_border">
+					<a href="#" class="loraBld16ptEFE7D3">My Specials added to favorites</a>
+					<span class="ui-icon ui_accordion_open_icon"></span>
+				</h3>
+				<div class="accordion-content arial16pt291911" style="display: none;">
+					<% if @specials_in_favorite.length == 0 %>
+						<div class="no_results_label">There are no results to display.</div>
+					<%else%>
+						<% @specials_in_favorite.each  do |analityc| %>
+							<div class="<%= cycle("ui_accordion_row_pair","ui_accordion_row_odd")%>">
+								<span class="month_label"><%=analityc.month%></span><span class="total_label"><%=analityc.total%></span>
+							</div>
+						<%end %>
+					<%end %>
+				</div>
+				<h3 class="ui-corner-bottom ui-accordion-header ui_accordion_top_border">
+					<a href="#" class="loraBld16ptEFE7D3">My Specials redeemed</a>
+					<span class="ui-icon ui_accordion_open_icon"></span>
+				</h3>
+				<div class="accordion-content arial16pt291911" style="display: none;">
+					<% if @redemptions.length == 0 %>
+						<div class="no_results_label">There are no results to display.</div>
+					<%else%>
+						<% @redemptions.each_with_index  do |analityc,index| %>
+							<%if index %2 == 0%>
+							<div class="ui_accordion_row_pair">
+							<%else%>
+							<div class="ui_accordion_row_odd">
+							<%end%>
+								<span class="month_label"><%=analityc.month%></span><span class="total_label"><%=analityc.total%></span>
+							</div>
+						<%end %>
+					<%end %>
+				</div>
+			</div>
+			<br />
+		</div>
+		<div id="napkinBottomLong">&nbsp;</div>
+	</div>
+	<div class="span-2 last"></div>
+</div>

@@ -1,0 +1,57 @@
+<div id="signinLeftPanel" class="span-17">
+	<div></div>
+	<p class="arial15ptEAE8E0">
+		<%= Restaurant::HOSTESSMESSAGE %>
+	</p>
+</div>
+<div id="signinPanel" class="span-15 last">
+	<div id="napkinTopSmall"></div>
+	<div id="napkinMiddleSmall">
+		<h2 class="lora28pt68804D paddingTop40">Change your password
+		<br />
+		</h2>
+		<br />
+		<hr size="4" align="center">
+		<hr size="2" align="center">
+		<br />
+		<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+
+		<%= f.hidden_field :reset_password_token %>
+		<div>
+			<%= f.password_field :password ,{:class=>"arial12pt808080 textInput marginTop15 marginLeft25",:id => "fieldForgotPassword"} %>
+		</div>
+		<div>
+			<br />
+			<%= f.password_field :password_confirmation,{:class=>"arial12pt808080 textInput marginTop15 marginLeft25",:id => "fieldForgotConfirmPassword"} %>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div>
+			<%= f.submit "", :id => "changeMyPasswordSubmit" %>
+		</div>
+		<br />
+		<% if !resource.errors[:reset_password_token].empty? %> <span class="arial15ptBE1E2D">Reset password token <%= resource.errors[:reset_password_token]%></span>
+		<br />
+		<% elsif !resource.errors[:password].empty?%>
+		<% resource.errors[:password].each do |error| %> <span class="arial15ptBE1E2D">Password <%= error%></span>
+		<br />
+		<% end %>
+		<% elsif !resource.errors[:password_confirmation].empty?%> <span class="arial15ptBE1E2D">Password confirmation <%= resource.errors[:password_confirmation]%></span>
+		<br />
+		<% end %>
+
+		<% end %>
+		<br />
+		<hr size="4" align="center">
+		<hr size="2" align="center">
+		<br />
+		<div>
+			<%= link_to("Learn More", { :controller=> "/content", :protocol => "http://", :action => "about"}, :class => "arialUln16pt291911") %>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<%= link_to("Sign Up Now", { :controller=> "admin/signup", :protocol => "http://", :action => "step1"}, :class => "arialUln16pt68804D") %>
+		</div>
+	</div>
+	<div id="napkinBottomSmall"></div>
+</div>

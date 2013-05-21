@@ -1,0 +1,62 @@
+<div id="signUpPanel" class="span-32">
+	<div class="span-32 last signupNav">
+		<div class="step1Inactive"></div>
+		<div class="step2Inactive"></div>
+		<div class="step3Active"></div>
+	</div>
+	<h1 class="lora28ptEFE7D3">Sign Up for Hostess</h1>
+	<hr align="center" class='separation2px'>
+	<hr align="center" class='separation1px'>
+	<h2 class="loraItalic16pt8CA671">Enter Payment</h2>
+	<div id="napkinTopLong" class="centerDiv"></div>
+	<div id="napkinMiddleLong" class="centerDiv">
+		<%= form_tag({:controller => "admin/signup", :action => "thank_you", :protocol => "http://"}) do %>
+		<div id="step3Form">
+			<%= text_field_tag(:fullname, "", {:class => "arial12pt808080 step3FullNametxt spanRight"}) %>
+			<%= select_tag(:card_type, card_types_information, {:prompt=>"Select Card Type", :class=>"arial12pt808080"}) %>
+			<br /><br />
+			<%= text_field_tag(:card_number, "", {:class => "arial12pt808080 step3CardCitytxt spanRight"}) %>
+			<%= text_field_tag(:cvc, "", {:class => "arial12pt808080 step3CVCtxt spanRight"}) %>
+			<span>EXP:&nbsp;&nbsp;</span>
+			<%= select_tag(:month, months_information, {:prompt=>"MM", :class=>"arial12pt808080 spanRight"}) %>
+			<%= select_tag(:year, years_information, {:prompt=>"YY", :class=>"arial12pt808080"}) %>
+			<br /><br />
+			<%= text_field_tag(:billing_address_1, "", {:class => "arial12pt808080 step3BillingAddtxt"}) %>
+			<br /><br />
+			<%= text_field_tag(:billing_address_2, "", {:class => "arial12pt808080 step3BillingAddtxt"}) %>
+			<br /><br />
+			<%= text_field_tag(:city, "", {:class => "arial12pt808080 step3CardCitytxt spanRight"}) %>
+			<%= select_tag(:state, options_from_collection_for_select(State.all, :id, :name), {:prompt=>"Select State", :class=>"arial12pt808080 spanRight stepSelectState"}) %>
+			<%= text_field_tag(:zip	, "", {:class => "arial12pt808080 step3Ziptxt"}) %>
+			<br /><br />
+			<%= check_box_tag(:agree, "true", false, :onclick => "enableBtn();") %>&nbsp;Agree to <div id="termsPopUpBtn">Terms</div>
+		</div>
+		<div class="step3RightPanel arial12pt8CA671">
+			Only $39.95 a month. No contracts. Sign-up now and start getting the benefits of mobile marketing using Hostess immediatly.
+			<p class="arialBld14pt8CA671" style='width: 110px;'>* Free trial for &nbsp;&nbsp;60 days</p>
+		</div>
+		<br /><br />
+		<!-- (c) 2005, 2012. Authorize.Net is a registered trademark of CyberSource Corporation -->
+		<div class="AuthorizeNetSeal" style="float:left">
+			<script type="text/javascript" language="javascript">var ANS_customer_id="c81e2feb-3e79-4a04-89f9-5dcc00768fde";</script>
+			<script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>
+			<a href="http://www.authorize.net/" id="AuthorizeNetText" target="_blank">Transaction Processing</a>
+		</div> 
+		<div class="step3ErrosDiv">
+			<% if session[:errors] %>
+			<ul>
+				<% session[:errors].each do |key, value| %>
+			    <li><%= value %></li>	
+			    <% end %>
+			</ul>
+			<% end %>
+		</div>
+		<%= submit_tag("", {:disable_with => "", :id => "signupBtn",:disabled => true}) %>
+		<% end %>
+		<br />
+		<br />
+		<br />
+	</div>
+	<div id="napkinBottomLong" class="centerDiv"></div>
+</div>
+<%= render :partial => "/shared/terms_popup" %>

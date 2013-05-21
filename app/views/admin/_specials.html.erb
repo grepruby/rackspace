@@ -1,0 +1,49 @@
+<span class="loraItalic16pt8CA671 infoSpecialTitle1">Specials</span><br /><br />
+<%= form_tag({:controller => "admin", :action => "refresh_special"},{:id => 'deleteActionForm',:multipart => true, :remote => true }) do %>
+	<%= hidden_field_tag('deleteFormAction', 'deleteSpecial') %>
+	<%= hidden_field_tag('specialSelectedOnDelete', 0) %>
+<% end %>
+<%= form_tag({:controller => "admin", :action => "refresh_special"},{:id => 'specialForm',:multipart => true, :remote => true }) do %>
+	<%= hidden_field_tag('specialSelected', 0) %>
+	<%= hidden_field_tag('formAction', '') %>
+	<%= hidden_field_tag('sendNotifications', false) %>
+	<div id="specialsNav" style="width: 100%; text-align:left;">
+	<%unless session[:specials].nil?%>
+		<% session[:specials].each_with_index  do |special,index| %>
+		<%if index==0%>
+		<%= submit_tag("", {:name => "special"+index.to_s+"Btn", :id => "special"+index.to_s+"Btn", :class => "special"+index.to_s+"Selected spanRight"}) %>
+		<%else%>
+		<%= submit_tag("", {:name => "special"+index.to_s+"Btn", :id => "special"+index.to_s+"Btn", :class => "spanRight special"+index.to_s}) %>
+		<%end%>
+		<%end %>
+	<% end %>
+	</div>		    
+	<br />
+	<span id="specialNumbTitle" class="loraItalic16pt8CA671 infoTitle1">Featured Special 1</span>
+	<a id="popupTutorial" class="arialUln12pt291911" href="#tutorial">View Tutorial</a>
+	<br /><br />
+	<%= text_field_tag(:special_title, nil , {:class=>"arial16pt808080 infotxt1"}) %><br /><br />
+	<%= text_area_tag(:special_details, "" , {:rows => 3, :cols => 25,:class=>"arial16pt808080 dealTxt noResizableTextarea"}) %><br /><br />
+	<span class="loraItalic12pt291911 dateLbl spanRight">Start Date</span>
+	<span class="loraItalic12pt291911 dateLbl">End Date</span>
+	<br />
+	<%= text_field_tag(:special_start_date, "" , {:class=>"arial16pt808080 dateTxt1 spanRight", :readonly=>"readonly"}) %>
+	<%= text_field_tag(:special_end_date, "" , {:class=>"arial16pt808080 dateTxt1", :readonly=>"readonly"}) %>
+	<br /><br />
+	<span class="loraItalic16pt8CA671 infoTitle2">Special Picture</span>
+	<br /><br />
+	<div id="specialPhotoDiv" class="uploadMyInfoContainer" >
+		<input id="special_photo_name_chk" type="checkbox" value="1" checked="checked" disabled style="display:none">
+		<span id="special_photo_name" class="arial16pt808080" style="display:none"></span>
+		<div id="photoSpecialNameSpace" style="display:none"></div>
+		<%= text_field_tag(:special_photo, "", {:name => "special_photo", :type=> 'file',:class => "arial16pt808080", :id=>'special_photo', :size=>"34"}) %>
+	</div>
+	<br /><br />
+	<%= text_area_tag(:special_tags, "" , {:rows => 3, :cols => 25,:class=>"arial16pt808080 dealTxt noResizableTextarea"}) %>
+	<br /><br />
+	<%= submit_tag("Add New Special", {:name => "add", :id => "addSpecialBtn", :disabled => "disabled", :class => "loraItalic12pt291911"}) %>
+	<div id="deleteSpecialBtn" disabled="disabled" class="loraItalic12pt291911">Delete This Special</div>
+	<br /><br /><br /><br />
+	<%= submit_tag("", {:id => "previewSpecialBtn", :name => "preview", :class => "spanRight"}) %>
+	<%= submit_tag("", {:name => "save", :id => "saveSpecialBtn"}) %>
+<% end %> 

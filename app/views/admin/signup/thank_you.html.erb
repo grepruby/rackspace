@@ -1,0 +1,37 @@
+<% content_for :head do %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		<%= render :partial => "/shared/allow_tutorial_popup.js" %>		
+	});
+</script>
+<%end%>
+<div id="signUpPanel" class="span-32">
+	<div class="span-32 last signupNav"></div>
+	<h1 class="lora28ptEFE7D3">Thank You for Signing Up with Hostess!</h1>
+	<hr align="center" class='separation2px'>
+	<hr align="center" class='separation1px'>
+	<br />
+	<div id="napkinTopLong" class="centerDiv"></div>
+	<div id="napkinMiddleLong" class="centerDiv">
+		<br />
+		<div class="thankYouleftPanel arial12pt8CA671">
+			Using Hostess is quick, easy, and effective. Get started now by filling out your Restaurant Information. 
+			If this is your first time, feel free to view the tutorial to understand some of Hostess' key features and 
+			how to use them.
+			<br />
+			<br />
+			<br />
+			<br />
+		</div>
+		<div class="thankYourightPanel">
+			<%= link_to "", '/', :id=>"getStartedBtn" %>
+			<br />
+			<br />
+			<a id="popupTutorial" class="viewTutorialBtn" href="#tutorial"></a>
+		</div>
+	</div>
+	<div id="napkinBottomLong" class="centerDiv"></div>
+	<div id="tutorialPopUp" style="display:none">
+		<%= render :partial => "/shared/tutorial" %>
+	</div>
+</div>

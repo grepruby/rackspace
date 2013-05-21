@@ -1,0 +1,28 @@
+development:
+  api_login_id: 65Bu23LnR5cZ  
+  api_transaction_key: 74Je52vFgb6L8w66
+  gateway: production
+  test : true
+   
+preview:
+  api_login_id: 65Bu23LnR5cZ  
+  api_transaction_key: 74Je52vFgb6L8w66
+  gateway: production
+  test : true
+  
+production:
+  api_login_id: 65Bu23LnR5cZ  
+  api_transaction_key: 74Je52vFgb6L8w66
+  gateway: production
+  test : false
+    
+
+
+
+
+
+
+
+
+
+

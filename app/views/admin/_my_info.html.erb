@@ -1,0 +1,50 @@
+<span class="loraItalic16pt8CA671 infoTitle1">General Info</span>
+<a id="popupTutorial" class="arialUln12pt291911" href="#tutorial">View Tutorial</a>
+<br /><br />
+<%= form_tag({:controller => "admin", :action => "refresh_design"},{:id => 'designForm',:multipart => true, :remote => true }) do %>
+	<%= hidden_field_tag('to_save', false) %>
+	<%= text_field_tag(:restaurant_name, @restaurant.name.try(:html_safe) , {:class=>"arial16pt808080 infotxt1"}) %>
+	<br />
+	<br />
+	<%= text_field_tag(:website_url, @restaurant.try(:website) , {:class=>"arial16pt808080 infotxt1"}) %>
+	<br />
+	<br />
+	<%= text_field_tag(:menu_url, @restaurant.try(:menu_url) , {:class=>"arial16pt808080 infotxt1"}) %>
+	<br />
+	<br />
+	<%= text_field_tag(:restaurant_phone_number, @restaurant.try(:phone_number) , {:class=>"arial16pt808080 infotxt1"}) %>
+	<br />
+	<br />
+	<%= text_field_tag(:restaurant_address, @restaurant.address.try(:html_safe) , {:class=>"arial16pt808080 infotxt1"}) %>
+	<br />
+	<br />
+	<%= text_field_tag(:city, @restaurant.city.try(:html_safe), {:class => "arial16pt808080 infoCitytxt"}) %>
+	<%= select_tag(:state, options_from_collection_for_select(State.all, :id, :name, @restaurant.try(:state_id)), 
+					{:prompt=>"Select State", :class=>"arial16pt808080 infoStateCmb"}) %>
+	<%= text_field_tag(:zip	, @restaurant.try(:zipcode), {:class => "arial16pt808080 infoZiptxt"}) %>
+	<br />
+	<br />
+	<span class="loraItalic16pt8CA671 infoTitle2">Profile Picture</span>
+	<br />
+	<br />
+	<div class="uploadMyInfoContainer" >
+		<input type='checkbox' value='1' id='restaurant_photo_name_chk' checked='checked' disabled <%= "style='display:none'" if @restaurant.photo_file_name.nil? %>>
+		<span id='restaurant_photo_name' class="arial16pt808080" <%= "style='display:none'" if @restaurant.photo_file_name.nil?%>><%=@restaurant.try(:photo_file_name)%></span>
+		<div id="photoNameSpace" <%= "style='display:none'" if @restaurant.photo_file_name.nil?%>></div>
+		<%= text_field_tag(:restaurant_photo, "", {:name => "upload", :type=> 'file',:class => "arial16pt808080", :id=>'restaurant_photo',	:size=>"34"}) %>
+	</div>
+	<br />	
+	<span class="loraItalic16pt8CA671 infoTitle2">Additional Media</span>
+	<br />
+	<br />
+	<%= text_field_tag(:video_url, @restaurant.try(:video_url) , {:class=>"arial16pt808080 infotxt1"}) %>
+	<br />
+	<br />
+	<%= select_tag("food_categories[]", options_from_collection_for_select(FoodCategory.find(:all, :order => "name ASC"),:id, :name, @restaurant.food_categories.map {|j| j.food_category_id} ), {:multiple => "multiple", :id => "food_categories"}) %>
+	<br />
+	<br />
+	<span class="arial12pt291911 infoRequiredFields">* All fields Required</span>
+	<br />
+	<%= submit_tag("", {:id => "previewBtn", :name => "preview", :class => "spanRight"}) %>
+	<%= submit_tag("", {:id => "saveBtn", :name => "save"}) %>
+<% end %> 

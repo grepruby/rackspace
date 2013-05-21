@@ -1,0 +1,44 @@
+<%= render :partial => "/shared/navMenu" %>
+<div id="content">
+	<h1 class="lora28ptEFE7D3">FAQ</h1>
+	<hr align="center" class='separation2px'>
+	<hr align="center" class='separation1px'>
+	
+	<h2 class="loraItalic16pt8CA671">I forgot my password? How do I retrieve it?</h2>
+	<p class="arial16ptEFE7D3">
+		You can retrieve your password by clicking "Forgot your password?" on the Sign In screen. You will be asked to enter your email and an 
+		email will be sent to you with a link to reset your password.
+	</p>
+	<h2 class="loraItalic16pt8CA671">How do I sign up?</h2>
+	<p class="arial16ptEFE7D3">
+		Click "Sign Up Now" on the Sign In screen. You will be asked to fill out your a few questions such as your username, password, 
+		and billing information to get your account ready to go. You'll then have the opportunity to view a quick tutorial to understand 
+		how to use Hostess to its full potential.
+	</p>
+	<h2 class="loraItalic16pt8CA671">I updated the information for my special, but it didn't update in the mobile app.</h2>
+	<p class="arial16ptEFE7D3">
+		After editing a special, be sure to click "Save" to implement your changes. Clicking Preview will show you what the Restaurant or 
+		Special screen will look like, but will not finalize the changes.
+	</p>
+	<h2 class="loraItalic16pt8CA671">How do I view my analytics?</h2>
+	<p class="arial16ptEFE7D3">
+		Sign In and simply click the Analytics tab. Analytics include Number of Patrons, Number of Impressions, Most Viewed Featured Deal, 
+		and Most Viewed Time of Day.
+	</p>
+	<h2 class="loraItalic16pt8CA671">How do I update my account information?</h2>
+	<p class="arial16ptEFE7D3">
+	    Sign in to Hostess and click on the Welcome section located at the top right.</br>
+	    Click "Account Settings".</br>
+	    Click "Edit" to edit your Business Name, Email, Password, and Billing Information</br>
+	</p>
+	<p class="arial16ptEFE7D3">
+		<%= link_to "Terms of Service", { :controller => "/content", :protocol => "http://", :action => "termsOfService"}, :class => "loraItalic16pt8CA671" %>
+	<br /><br />
+		<%= link_to "Privacy", { :controller => "/content", :protocol => "http://", :action => "privacyPolicy"}, :class => "loraItalic16pt8CA671" %>
+	</p>	
+	<h2 class="loraItalic16pt8CA671">Can't find your answer?</h2>
+	<p class="arial16ptEFE7D3">
+	    We'd love to hear from you. Your feedback is essential to helping us improve our services to best meet your needs. Send your questions 
+		to <a class="arialUln16pt8CA671" id="link_to_mobile" href="mailto:help@myhostessapp.com?subject=feedback">help@myhostessapp.com</a> and we will get back to you as soon as possible.
+	</p>	
+</div>

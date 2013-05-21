@@ -1,0 +1,26 @@
+//
+jQuery("#specialsContent").hide();
+//change buttons
+jQuery("#myInfoBtn").replaceWith("<div id='myInfoBtnSelected'></div>");
+jQuery("#specialsBtnSelected").replaceWith("<%= escape_javascript(link_to('',{:controller => 'admin', :action => 'specials'}, {:id=>'specialsBtn', :class=>'arialUln12pt291911', :remote => true})) %>");
+//remove old content and add the my info
+jQuery("#myInfoContent").show();
+//Replace the right panel
+jQuery("#rightPanel").html("Iphone<br />Restaurant Info");
+
+
+if ("<%= @restaurant.photo_file_name%>" == "")
+{
+	jQuery("#restaurant_photo_name_chk").hide();
+	jQuery("#restaurant_photo_name").hide();
+	jQuery("#restaurant_photo_name").text("");
+	jQuery("#photoNameSpace").hide();
+	
+}
+else
+{
+	jQuery("#restaurant_photo_name_chk").show();	
+	jQuery("#restaurant_photo_name").text("<%= @restaurant.photo_file_name%>");
+	jQuery("#restaurant_photo_name").show();
+	jQuery("#photoNameSpace").show();
+}

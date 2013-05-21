@@ -1,0 +1,33 @@
+<table cellpadding='10' cellspacing='0' border='0' width='750'>
+<tr>
+<td width='160'>
+<img src='http://mobile.myhostessapp.com/images/email/hostess_sign.png' width='160'/>
+</td>
+<td width='590'>
+Dear <%= @user.first_name%> <%= @user.last_name%>,<br />
+<p>
+Welcome to your Hostess 60 day free trial! I appreciate you giving Hostess a try and look forward to any feedback you could provide during this trial.
+</p>
+<p>
+Soon you will be communicating directly to your patrons in real-time. Your Hostess mobile service for the iPhone includes a strong foundation of tools to help grow your business including Search, Location, Display, Referral, and Analytic reporting.
+</p>
+<p>
+Promote a particular dish that is unique, highly profitable, seasonal, locally sourced, organic, new, or for a limited time. Use existing ads from other media campaigns. Remind your guests to come see you at a particular time of day.  Keep track of the progress by viewing the analytics summary.
+</p>
+<p>
+We are certain your experience using Hostess will prove beneficial. That is why we provide you 60 days to see for yourself. Thereafter, Hostess is only $39.95 a month without contracts or obligations. It will be billed automatically to the card on file (<%=@user.billing_information.try(:full_name)%>).  
+</p>
+<p>
+Please expect a call from us to answer any questions and help you get started. Feel free to let us know of a specific time that works best for you for a call. 
+</p>
+<p>
+I look forward to your comments and feedback from using Hostess.
+</p>
+<br />
+Thanks for your business!<br />
+Alan Cole<br />
+President, Hostess Marketing, LLC<br />
+</p>
+</td>
+</tr>
+</table>

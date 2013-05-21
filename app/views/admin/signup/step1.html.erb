@@ -1,0 +1,42 @@
+<div id="signUpPanel" class="span-32">
+	<div class="span-32 last signupNav">
+		<div class="step1Active"></div>
+		<div class="step2Inactive"></div>
+		<div class="step3Inactive"></div>
+	</div>
+	<h1 class="lora28ptEFE7D3">Sign Up for Hostess</h1>
+	<hr align="center" class='separation2px'>
+	<hr align="center" class='separation1px'>
+	<h2 class="loraItalic16pt8CA671">Select Username and Password</h2>
+	<div id="napkinTopLong" class="centerDiv"></div>
+	<div id="napkinMiddleLong" class="centerDiv">	
+		<%= form_tag({:controller => "admin/signup", :action => "thank_you", :protocol => "http://"}, :id => 'step1Form') do %>
+			<span class="arialBld18pt8CA671 spanLbl">Name</span>
+			<%= text_field_tag(:first_name, session[:user].try(:first_name) , {:class=>"arial12pt808080 step1txt spanRight"}) %>
+			<%= text_field_tag(:last_name, session[:user].try(:last_name), {:class=>"arial12pt808080 step1txt"}) %>
+			<br />
+			<br />
+			<span class="arialBld18pt8CA671 spanLbl">Username</span>
+			<%= text_field_tag(:username, session[:user].try(:email) , {:class=>"arial12pt808080 step1txt spanRight"}) %>
+			<%= text_field_tag(:username_confirmation, session[:user].try(:email_confirmation), {:class=>"arial12pt808080 step1txt"}) %>
+			<br />
+			<br />
+			<span class="arialBld18pt8CA671 spanLbl">Password</span>
+			<%= password_field_tag(:password, session[:user].try(:password), {:class=>"arial12pt808080 step1txt spanRight"}) %>
+			<%= password_field_tag(:password_confirmation, session[:user].try(:password_confirmation), {:class=>"arial12pt808080 step1txt"}) %>
+			<br /><br />
+			<div class="step1ErrosDiv">
+				<% if session[:errors] %>
+				<ul>
+					<% session[:errors].each do |key, value| %>
+				    <li> <strong><%= key.to_s.capitalize %></strong>&nbsp;<%= value %>.</li>	
+				    <% end %>
+				</ul>
+				<% end %>
+			</div>
+			<%= submit_tag("", {:disable_with => "", :id => "nextBtn"}) %>	
+		
+		<% end %>
+	</div>
+	<div id="napkinBottomLong" class="centerDiv"></div>
+</div>
