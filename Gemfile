@@ -20,7 +20,7 @@ gem 'paperclip', '2.4.5'
 gem "geocoder"
 
 # adding the gem that paginates the requests
-gem 'will_paginate'
+ gem 'will_paginate'
 
 # allow the forms to use AJAX to upload images
 gem "remotipart", "~> 1.0"
@@ -39,6 +39,7 @@ gem 'httparty'
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
 gem 'debugger', :require => 'debugger'
+gem 'activeadmin'
 
 # Bundle the extra gems:
 # gem 'bj'

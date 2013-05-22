@@ -75,32 +75,47 @@ class Admin::SignupController < ApplicationController
   # Diners Club/ Carte Blanche 38000000000006
 
   def thank_you
-    debugger
-    user = session[:user]
-    user.zip = params[:zip]
+    user = User.new
+    user.first_name = params[:first_name]
+    user.last_name = params[:last_name]
+    user.email = params[:username]
+    user.email_confirmation = params[:username_confirmation]
+    user.password = params[:password]
+    user.password_confirmation = params[:password_confirmation]
+    session[:user] = user
+    if user.valid?
+      session[:errors] = nil
+      user.save
+    else
+      session[:errors] = user.errors
+      redirect_to admin_signup_step1_path
+    end 
+  
+    # user = session[:user]
+    # user.zip = params[:zip]
     
-    start_date = Date.today
-    start_date += 61
+    # start_date = Date.today
+    # start_date += 61
     
-    response = create_autorrecuring_subscription(start_date, user, params[:card_number], params[:month], params[:year], 
-                                                  params[:cvc], params[:card_type], params[:city], params[:state],
-                                                  params[:billing_address_1], params[:billing_address_2])
-    if response.success?
-        session[:errors] = nil
-        session[:user] = nil
-        user.arb_subscription_id = response.subscription_id
-        user.arb_status = AuthorizeNet::ARB::Subscription::Status::ACTIVE
-        user.billing_information_id = user.add_billing_information(params[:fullname], params[:billing_address_1] ,
-                                                                   params[:billing_address_2], params[:city], params[:state],
-                                                                   params[:zip]).id
-        user.save
-      else
-        puts "Failed to make purchase. " + response.response_reason_code + " - " + response.response_reason_text
-        user.errors.clear()
-        user.errors.add(:transaction, response.response_reason_text)
-        session[:errors] = user.errors
-        redirect_to admin_signup_step3_path
-      end 
+    # response = create_autorrecuring_subscription(start_date, user, params[:card_number], params[:month], params[:year], 
+    #                                               params[:cvc], params[:card_type], params[:city], params[:state],
+    #                                               params[:billing_address_1], params[:billing_address_2])
+    # if response.success?
+    #     session[:errors] = nil
+    #     session[:user] = nil
+    #     user.arb_subscription_id = response.subscription_id
+    #     user.arb_status = AuthorizeNet::ARB::Subscription::Status::ACTIVE
+    #     user.billing_information_id = user.add_billing_information(params[:fullname], params[:billing_address_1] ,
+    #                                                                params[:billing_address_2], params[:city], params[:state],
+    #                                                                params[:zip]).id
+    #     user.save
+    #   else
+    #     puts "Failed to make purchase. " + response.response_reason_code + " - " + response.response_reason_text
+    #     user.errors.clear()
+    #     user.errors.add(:transaction, response.response_reason_text)
+    #     session[:errors] = user.errors
+    #     redirect_to admin_signup_step3_path
+    #   end 
 
     
   end

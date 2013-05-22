@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :timeoutable, :validatable
 
   #relations
-  belongs_to :subscription
-  belongs_to :billing_information, :dependent => :destroy
+  # belongs_to :subscription
+  # belongs_to :billing_information, :dependent => :destroy
   
   after_destroy :delete_relationships
   

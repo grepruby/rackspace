@@ -5,15 +5,23 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource_or_scope)
     session[:specials] = nil
-    unless current_user.arb_subscription_id.nil?
-      arb_transaction = AuthorizeNet::ARB::Transaction.new("65Bu23LnR5cZ", "74Je52vFgb6L8w66", :gateway => :production, :test => false)
-      response = arb_transaction.get_status(current_user.arb_subscription_id)
-      if current_user.arb_status.nil? || current_user.arb_status != response.subscription_status
-        current_user.arb_status = response.subscription_status
-        current_user.save
+    if resource_or_scope.is_a?(User)
+      if resource_or_scope.confirm == true
+        unless current_user.arb_subscription_id.nil?
+          arb_transaction = AuthorizeNet::ARB::Transaction.new("65Bu23LnR5cZ", "74Je52vFgb6L8w66", :gateway => :production, :test => false)
+          response = arb_transaction.get_status(current_user.arb_subscription_id)
+          if current_user.arb_status.nil? || current_user.arb_status != response.subscription_status
+            current_user.arb_status = response.subscription_status
+            current_user.save
+          end
+        end
+        super
+      else
+        destroy_user_session_path
       end
+    else
+      admin_dashboard_path
     end
-    super
   end
 
   

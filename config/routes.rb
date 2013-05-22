@@ -1,9 +1,12 @@
 Hostess::Application.routes.draw do
-  # include devise routes
-  devise_for :users
+  devise_for :admin_users, ActiveAdmin::Devise.config
   
   # root route
   root :to => "Admin#design"
+  
+  # include devise routes
+  devise_for :users
+  ActiveAdmin.routes(self)
 
   #Services routes:
   namespace :services do
